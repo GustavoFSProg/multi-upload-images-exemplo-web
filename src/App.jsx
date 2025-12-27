@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useNavigate } from "react-router-dom";
 import api from "./api";
 // import './App.css'
 
 function App() {
   const [produtos, setProdutos] = useState([]);
 
-  function setLocalstorageProfile(id) {
+  const navigate = useNavigate();
+
+  function setLocalstorageProfile(id, nome) {
     localStorage.setItem("MY-PROD", id);
+    localStorage.setItem("NAME", nome);
+
+    navigate("/profile");
   }
 
   async function getProdutos() {
@@ -30,13 +34,15 @@ function App() {
       <div>
         {produtos.map((items) => {
           return (
-            <button onClick={() => setLocalstorageProfile(items.id)}>
-              <div key={items.id}>
+            <div key={items.id}>
+              <button
+                onClick={() => setLocalstorageProfile(items.id, items.name)}
+              >
                 <p>{items.name}</p>
                 <img width="300" src={items.image} />
                 <p>Price: R$ {items.price}</p>
-              </div>
-            </button>
+              </button>
+            </div>
           );
         })}
       </div>
