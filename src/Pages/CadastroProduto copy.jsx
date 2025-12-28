@@ -82,32 +82,33 @@ const Price = styled.p`
   }
 `;
 
-function Profile() {
-  const [images, setImages] = useState([]);
+function CadastroProdutos() {
+  const [image, setImage] = useState([]);
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
-  async function GetProductId() {
+  async function CadastroProduto(e) {
+    e.preventDefault();
     try {
-      const id = localStorage.getItem("MY-PROD");
-      const nome = localStorage.getItem("NAME");
+      const data = new FormData();
 
-      setName(nome);
+      data.append("image", image);
+      data.append("name", name);
+      data.append("description", description);
+      data.append("price", price);
 
-      console.log(id);
+      await api.get(`/create-product`, data);
 
-      const { data } = await api.get(`/get-product-images/${id}`);
-
-      setImages(data);
-
-      console.log(data);
+      return alert("CADASTRADO!");
     } catch (error) {
       return alert(error);
     }
   }
 
-  useEffect(() => {
-    GetProductId();
-  }, []);
+  // useEffect(() => {
+  //   GetProductId();
+  // }, []);
   return (
     <>
       <div
@@ -122,18 +123,55 @@ function Profile() {
       >
         <Link to="/">HOME</Link>
 
-        <H1>PÁGINA DO PRODUTO </H1>
-        <h1>{name}</h1>
-        {images.map((items) => {
-          return (
-            <div key={items.id}>
-              <img width="220" src={items.images} />
-            </div>
-          );
-        })}
+        <H1>CADASTRO DO PRODUTO </H1>
+        <form
+          style={{
+            display: "flex",
+            width: "100vw",
+            height: "auto",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+          onSubmit={CadastroProduto}
+        >
+          <input
+            type="file"
+            multiple
+            placeholder="Imagens"
+            id="image"
+            onChange={(e) => setImage(e.target.value[0])}
+          />
+
+          <input
+            type="text"
+            placeholder="Nome"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Descrição"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <input
+            type="text"
+            placeholder="Preço"
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
+
+          <button type="submit">CADASTRAR</button>
+        </form>
       </div>
     </>
   );
 }
 
-export default Profile;
+export default CadastroProdutos;
