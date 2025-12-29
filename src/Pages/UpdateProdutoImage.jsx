@@ -82,32 +82,32 @@ const Price = styled.p`
   }
 `;
 
-function Profile() {
-  const [images, setImages] = useState([]);
-  const [name, setName] = useState("");
+function UpdateProdutoImage() {
+  const [image, setImage] = useState([]);
 
-  async function GetProductId() {
+  async function UpdateImage() {
     try {
       const id = localStorage.getItem("MY-PROD");
-      const nome = localStorage.getItem("NAME");
 
-      setName(nome);
+      const data = new FormData();
+
+      data.append("image", image);
 
       console.log(id);
 
-      const { data } = await api.get(`/get-product-images/${id}`);
+      await api.put(`/update-product/${id}`, data);
 
-      setImages(data);
+      // setImage(data);
 
-      console.log(data);
+      return alert("Imagem atualizada!!");
     } catch (error) {
       return alert(error);
     }
   }
 
-  useEffect(() => {
-    GetProductId();
-  }, []);
+  // useEffect(() => {
+  //   GetProductId();
+  // }, []);
   return (
     <>
       <div
@@ -121,20 +121,21 @@ function Profile() {
         }}
       >
         <Link to="/">HOME</Link>
-        <Link to="/update-image-produto">ATUALIZAR IMAGEM</Link>
 
-        <H1>PÁGINA DO PRODUTO </H1>
+        <H1>ATUALIZAR A PRIMEIRA IMAGEM </H1>
         <h1>{name}</h1>
-        {images.map((items) => {
-          return (
-            <div key={items.id}>
-              <img width="220" src={items.images} />
-            </div>
-          );
-        })}
+        <form onSubmit={UpdateImage}>
+          <input
+            type="file"
+            id="image"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+
+          <button type="submit">ATUALIZAR</button>
+        </form>
       </div>
     </>
   );
 }
 
-export default Profile;
+export default UpdateProdutoImage;
