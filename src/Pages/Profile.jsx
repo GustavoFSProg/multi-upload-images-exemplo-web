@@ -122,9 +122,6 @@ function Profile() {
           flexDirection: "column",
         }}
       >
-        <Link to="/">HOME</Link>
-        <Link to="/update-image-produto">ATUALIZAR IMAGEM</Link>
-
         <H1>PÁGINA DO PRODUTO </H1>
         <h1>{name}</h1>
         {images.map((items) => {
