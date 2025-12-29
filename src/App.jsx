@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "./api";
+import Header from "./Components/Header";
 // import './App.css'
 
 function App() {
@@ -31,9 +32,8 @@ function App() {
   }, []);
   return (
     <>
+      <Header />
       <div>
-        <Link to="/cadastro-produto">CADASTRO</Link>
-        <Link to="/">HOME</Link>
         {produtos.map((items) => {
           return (
             <div key={items.id}>

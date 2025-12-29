@@ -4,6 +4,7 @@ import Dropzone, { FileRejection } from "react-dropzone";
 import { AxiosResponse } from "axios";
 import { styled } from "styled-components";
 import api from "../api";
+import Header from "../Components/Header";
 
 interface Product {
   id: string;
@@ -112,6 +113,7 @@ const CadastroProduto = () => {
 
   return (
     <>
+      <Header />
       <Dropzone onDrop={onDropCallback} multiple accept={{ "image/*": [] }}>
         {({ getRootProps, getInputProps }) => (
           <Wrapper {...getRootProps()}>

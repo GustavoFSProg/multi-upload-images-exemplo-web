@@ -4,7 +4,6 @@ import api from "../api";
 // import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Header from "../Components/Header";
 
 const Container = styled.div`
   display: flex;
@@ -83,60 +82,67 @@ const Price = styled.p`
   }
 `;
 
-function Profile() {
-  const [images, setImages] = useState([]);
-  const [name, setName] = useState("");
-
-  async function GetProductId() {
-    try {
-      const id = localStorage.getItem("MY-PROD");
-      const nome = localStorage.getItem("NAME");
-
-      setName(nome);
-
-      console.log(id);
-
-      const { data } = await api.get(`/get-product-images/${id}`);
-
-      setImages(data);
-
-      console.log(data);
-    } catch (error) {
-      return alert(error);
-    }
-  }
-
-  useEffect(() => {
-    GetProductId();
-  }, []);
+function Header() {
   return (
     <>
-      <Header />
       <div
         style={{
           display: "flex",
           width: "100vw",
-          height: "auto",
+          height: "60px",
           justifyContent: "center",
           alignItems: "center",
-          flexDirection: "column",
+          background: "green",
+          color: "yellow",
         }}
       >
-        <Link to="/">HOME</Link>
-        <Link to="/update-image-produto">ATUALIZAR IMAGEM</Link>
-
-        <H1>PÁGINA DO PRODUTO </H1>
-        <h1>{name}</h1>
-        {images.map((items) => {
-          return (
-            <div key={items.id}>
-              <img width="220" src={items.images} />
-            </div>
-          );
-        })}
+        <div
+          style={{
+            display: "flex",
+            width: "50%",
+            height: "100px",
+            justifyContent: "space-between",
+            alignItems: "center",
+            color: "yellow",
+          }}
+        >
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "yellow",
+              fontFamily: "Arial",
+              fontWeight: "bold",
+            }}
+            to="/"
+          >
+            HOME
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "yellow",
+              fontFamily: "Arial",
+              fontWeight: "bold",
+            }}
+            to="/update-image-produto"
+          >
+            ATUALIZAR IMAGEM
+          </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "yellow",
+              fontFamily: "Arial",
+              fontWeight: "bold",
+            }}
+            to="/cadastro-produto"
+          >
+            CADASTRO
+          </Link>
+        </div>
       </div>
     </>
   );
 }
 
-export default Profile;
+export default Header;

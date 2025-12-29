@@ -4,6 +4,7 @@ import api from "../api";
 // import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Header from "../Components/Header";
 
 const Container = styled.div`
   display: flex;
@@ -110,6 +111,7 @@ function UpdateProdutoImage() {
   // }, []);
   return (
     <>
+      <Header />
       <div
         style={{
           display: "flex",
@@ -120,18 +122,22 @@ function UpdateProdutoImage() {
           flexDirection: "column",
         }}
       >
-        <Link to="/">HOME</Link>
-
         <H1>ATUALIZAR A PRIMEIRA IMAGEM </H1>
-        <h1>{name}</h1>
-        <form onSubmit={UpdateImage}>
+        <form
+          style={{ display: "flex", flexDirection: "column" }}
+          onSubmit={UpdateImage}
+        >
           <input
             type="file"
             id="image"
             onChange={(e) => setImage(e.target.files[0])}
           />
-
-          <button type="submit">ATUALIZAR</button>
+          <br />
+          <br />
+          <br />
+          <button style={{ height: "50px" }} type="submit">
+            ATUALIZAR
+          </button>
         </form>
       </div>
     </>
