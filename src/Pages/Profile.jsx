@@ -7,21 +7,28 @@ import { Link } from "react-router-dom";
 import Header from "../Components/Header";
 
 const Container = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  // background: "yellow",
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  height: auto;
+  width: 80%;
   justify-content: center;
   align-items: center;
-  margin-top: -50px;
+  /* margin-left: 22px; */
+  margin-bottom: 200px;
+  margin-top: 50px;
+  margin-left: 150px;
 
-  @media screen and (max-width: 400px) {
-    margin-top: -70px;
-  }
-
-  @media screen and (min-width: 400px) and (max-width: 800px) {
-    margin-top: -30px;
+  @media screen and (max-width: 800px) {
+    /* width: 60%;
+    padding-top: 2px; */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 3px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -124,13 +131,15 @@ function Profile() {
       >
         <H1>PÁGINA DO PRODUTO </H1>
         <h1>{name}</h1>
-        {images.map((items) => {
-          return (
-            <div key={items.id}>
-              <img width="220" src={items.images} />
-            </div>
-          );
-        })}
+        <Container>
+          {images.map((items) => {
+            return (
+              <div key={items.id}>
+                <img width="220" src={items.images} />
+              </div>
+            );
+          })}
+        </Container>
       </div>
     </>
   );

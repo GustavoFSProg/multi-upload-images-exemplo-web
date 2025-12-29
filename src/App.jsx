@@ -88,6 +88,7 @@ function App() {
                     // paddingBottom: "120px",
 
                     border: "1px solid gray",
+                    cursor: "pointer",
                   }}
                   onClick={() => setLocalstorageProfile(items.id, items.name)}
                 >

@@ -1,26 +1,33 @@
 /* eslint-disable no-undef */
-import { useEffect, useState } from "react";
-import api from "../api";
-// import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 60px;
   flex-direction: column;
   // background: "yellow",
   justify-content: center;
   align-items: center;
-  margin-top: -50px;
+  /* margin-top: -50px; */
+  background: green;
+  color: yellow;
+  /* 
+   style={{
+          display: "flex",
+          width: "100vw",
+          height: "60px",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "green",
+          color: "yellow",
+        }} */
 
-  @media screen and (max-width: 400px) {
-    margin-top: -70px;
-  }
-
-  @media screen and (min-width: 400px) and (max-width: 800px) {
-    margin-top: -30px;
+  @media screen and (max-width: 800px) {
+    height: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 `;
 
@@ -82,30 +89,25 @@ const Price = styled.p`
   }
 `;
 
+const ContainerLinks = styled.div`
+  display: flex;
+  width: 50%;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+  color: yellow;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    height: 80px;
+  }
+`;
+
 function Header() {
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          width: "100vw",
-          height: "60px",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "green",
-          color: "yellow",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            width: "50%",
-            height: "100px",
-            justifyContent: "space-between",
-            alignItems: "center",
-            color: "yellow",
-          }}
-        >
+      <Container>
+        <ContainerLinks>
           <Link
             style={{
               textDecoration: "none",
@@ -139,8 +141,8 @@ function Header() {
           >
             CADASTRO
           </Link>
-        </div>
-      </div>
+        </ContainerLinks>
+      </Container>
     </>
   );
 }
